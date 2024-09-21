@@ -1,0 +1,70 @@
+debug: true
+server:
+  port: 9005
+  error:
+    include-stacktrace: always
+
+smtp:
+  userhost:
+  passwordhost:
+  host: smtp.yandex.com
+  port: 465
+
+redis:
+  redishost: localhost
+  redisport: 6379
+
+greensms:
+  api: https://api3.greensms.ru/sms/send
+  user:
+  pass:
+  from: GREENSMS
+
+logging:
+  level:
+    root: DEBUG
+    javax.management: ERROR
+    org.springframework.security.web.FilterChainProxy: DEBUG
+    org.springframework.security: TRACE
+    logging.level.org.hibernate.SQL: INFO
+    com.zaxxer.hikari: ERROR
+    org.postgresql: ERROR
+
+spring:
+  #  datasource:
+  #   url: jdbc:postgresql://localhost:5432/test
+  #   username:
+  #   password:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  mvc:
+    cors:
+      configs:
+        - pattern: /**
+          allowed-origins: "http://localhost:9003"
+          allowed-headers: "*"
+          exposed-headers: "*"
+          allowed-methods: "*"
+          allow-credentials: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jws-algorithms: RS256
+          public-key-location: classpath:certificates/public.pem
+          issuer-uri: http://localhost:9002
+
+springdoc:
+  auth-types:
+    auth-header-enabled: true
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: true
+    path:
+
+rsa:
+  public-key: classpath:certificates/public.pem
