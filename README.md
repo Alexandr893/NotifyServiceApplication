@@ -1,0 +1,2 @@
+# NotifyServiceApplication
+Сервис рассылок
